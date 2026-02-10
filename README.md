@@ -202,4 +202,109 @@ No force pushes to GitHub
 
 Clean, reviewable Terraform plan
 
+📅 Day 4 – VPC Deployment & NAT Gateway Configuration
+🎯 Objective
+
+Apply the VPC design created on Day 3, configure outbound internet access for private subnets using a NAT Gateway, and validate the network configuration while maintaining strict cost control.
+
+🏗️ Infrastructure Applied
+VPC (10.0.0.0/16)
+├── Public Subnet (10.0.1.0/24)
+│   ├── Internet Gateway
+│   └── NAT Gateway (Elastic IP)
+├── Private Subnet (10.0.2.0/24)
+│   └── Route to NAT Gateway
+└── Route Tables
+
+
+This setup represents a production-grade AWS network architecture commonly used for secure workloads.
+
+✅ Tasks Completed
+
+Applied VPC and subnet infrastructure using Terraform
+
+Allocated Elastic IP for NAT Gateway
+
+Deployed NAT Gateway in public subnet
+
+Configured private route table to use NAT Gateway
+
+Validated network resources via Terraform outputs and AWS Console
+
+Committed infrastructure changes to GitHub
+
+Maintained cost awareness by planning resource teardown
+
+📂 Files Modified
+infra/
+├── main.tf
+├── variables.tf
+├── outputs.tf
+
+🧩 Key Terraform Resources Added
+
+aws_eip
+
+aws_nat_gateway
+
+aws_route_table (private)
+
+aws_route_table_association (private subnet)
+
+🚀 Terraform Execution
+terraform init
+terraform plan
+terraform apply
+
+
+Apply Result:
+
+Apply complete! Resources: X added, 0 changed, 0 destroyed.
+
+💰 Cost Awareness & Cleanup Strategy
+
+NAT Gateways incur ongoing hourly and data transfer costs.
+
+For learning and validation:
+
+NAT Gateway was created to validate routing behavior
+
+Infrastructure was planned for immediate destruction after verification
+
+Prevented unnecessary long-running cloud expenses
+
+In development environments, infrastructure should be short-lived and cost-controlled.
+
+🧠 Key Learnings
+
+terraform apply should only be executed after a validated plan
+
+NAT Gateways must reside in public subnets
+
+Private subnets require NAT for outbound internet access
+
+Infrastructure lifecycle management is as important as creation
+
+Cost awareness is a core DevOps responsibility
+
+🔒 Best Practices Followed
+
+No hardcoded credentials
+
+No force-push to GitHub
+
+Clean Git history with rebase workflow
+
+Infrastructure reviewed before apply
+
+Cost-impacting resources planned for teardown
+
+⏭️ Next Steps (Day 5)
+
+Launch EC2 instances in public and private subnets
+
+Validate outbound connectivity paths
+
+Test routing behavior without exposing private workloads
+
 Clean commit history
